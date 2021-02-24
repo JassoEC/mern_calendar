@@ -1,0 +1,26 @@
+{
+  "name": "mern_calendar",
+  "version": "1.0.0",
+  "description": "Proyecto de introducción al desarrollo con NODEJS",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JassoEC/mern_calendar.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JassoEC/mern_calendar/issues"
+  },
+  "homepage": "https://github.com/JassoEC/mern_calendar#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  }
+}
