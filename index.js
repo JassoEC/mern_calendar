@@ -7,6 +7,9 @@ const app = express();
 // Public Path
 app.use(express.static('public'))
 
+// Request parese
+app.use(express.json())
+
 // Routes
 app.use('/api/auth',require('./routes/auth'));
 
