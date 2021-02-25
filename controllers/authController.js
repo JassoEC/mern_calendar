@@ -31,14 +31,34 @@ const createUser = async (request, response) => {
   }
 };
 
-const login = (request, response) => {
+const login = async (request, response) => {
   const { email, password } = request.body;
 
-  response.json({
-    msg: "Login usuario",
-    email,
-    password,
-  });
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return response.status(404).json({
+        msg: "Datos incorrectos",
+      });
+    }
+
+    const checkPassword = bcrypt.compareSync(password, user.password);
+
+    if (!checkPassword) {
+      return response.status(400).json({
+        msg: "Verifica la contraseña",
+      });
+    }
+
+    response.json({
+      msg: "Login usuario",
+      data: user,
+    });
+  } catch (error) {
+    response.status(500).json({
+      msg: "Error interno de servidor",
+    });
+  }
 };
 
 const refreshToken = (request, response) => {
