@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const bcrypt = require("bcryptjs");
 
 const createUser = async (request, response) => {
   const { name, email, password } = request.body;
@@ -12,6 +13,11 @@ const createUser = async (request, response) => {
     }
 
     user = new User({ name, email, password });
+
+    const salt = bcrypt.genSaltSync();
+
+    user.password = bcrypt.hashSync(password, salt);
+
     await user.save();
     response.status(201).json({
       msg: "Registro exitoso",
