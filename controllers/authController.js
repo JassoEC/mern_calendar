@@ -4,10 +4,18 @@ const createUser = async (request, response) => {
   const { name, email, password } = request.body;
 
   try {
-    const user = new User({ name, email, password });
+    let user = await User.findOne({ email });
+    if (user) {
+      return response.status(400).json({
+        msg: "Ya existe un usuario registrado con ese correo",
+      });
+    }
+
+    user = new User({ name, email, password });
     await user.save();
     response.status(201).json({
       msg: "Registro exitoso",
+      data: user,
     });
   } catch (error) {
     console.log(error);
