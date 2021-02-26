@@ -1,12 +1,17 @@
+const { request } = require("express");
 const express = require("express");
 require("dotenv").config();
 const { dbConnection } = require("./db/config");
+const cors = require("cors");
 
 // express server
 const app = express();
 
 // Mongo Connection
 dbConnection();
+
+// Cors
+app.use(cors());
 
 // Public Path
 app.use(express.static("public"));

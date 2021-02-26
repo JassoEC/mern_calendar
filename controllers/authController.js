@@ -58,7 +58,7 @@ const login = async (request, response) => {
 
     response.json({
       ok: true,
-      uudi: user.id,
+      udi: user.id,
       name: user.name,
       token,
     });
@@ -69,9 +69,15 @@ const login = async (request, response) => {
   }
 };
 
-const refreshToken = (request, response) => {
+const refreshToken = async (request, response) => {
+  const { uid, name } = request;
+
+  const token = await generateJWT(uid, name);
   response.json({
     msg: "refresh Token",
+    uid,
+    name,
+    token,
   });
 };
 
