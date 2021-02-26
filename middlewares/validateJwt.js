@@ -6,7 +6,7 @@ const validateJWT = (req, resp = response, next) => {
 
   if (!token) {
     return resp.status(401).json({
-      msg: "invalid credenials",
+      msg: "invalid credentials",
     });
   }
 

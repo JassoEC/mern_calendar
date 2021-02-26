@@ -16,11 +16,12 @@ app.use(cors());
 // Public Path
 app.use(express.static("public"));
 
-// Request parese
+// Request parse
 app.use(express.json());
 
 // Routes
-app.use("/api/auth", require("./routes/auth"));
+app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/api/event", require("./routes/eventRoutes"));
 
 //listen request
 app.listen(process.env.PORT, () => {
