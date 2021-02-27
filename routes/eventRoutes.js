@@ -20,6 +20,7 @@ const router = Router();
 
 router.use(validateJWT);
 
+router.get("/", getEvents);
 router.post(
   "/",
   [
@@ -41,8 +42,27 @@ router.post(
   ],
   createEvent
 );
-router.get("/", getEvents);
+router.put(
+  "/:id",
+  [
+    check("title").not().isEmpty().withMessage("Ingresa el titulo"),
+    check("startDate")
+      .not()
+      .isEmpty()
+      .withMessage("Ingresa la fecha de inico")
+      .custom(isDate)
+      .withMessage("Ingresa una fecha valida"),
+    check("endDate")
+      .not()
+      .isEmpty()
+      .withMessage("Ingresa la fecha de finalización")
+      .custom(isDate)
+      .withMessage("Ingresa una fecha valida"),
+    check("userId").not().notEmpty().withMessage("A que usuario pertence"),
+    validateFields,
+  ],
+  updateEvent
+);
 router.delete("/:id", deleteEvent);
-router.put("/:id", updateEvent);
 
 module.exports = router;
